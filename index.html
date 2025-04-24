@@ -13,11 +13,18 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="<KEY>" crossorigin="anonymous"></script>
 
   <link rel="stylesheet" href="assets/css/style.css">
+
+  <!-- Audio element for background music -->
+  <audio id="backgroundMusic" loop>
+    <source src="assets/audio/background_music.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
 </head>
 <body class="bg-container">
 <div class="container">
   <div class="text">
     <h1>Menu Utama</h1>
+    <button id="playMusicBtn" class="btn btn-sm btn-primary mb-3">Play Music</button>
   </div>
 
   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 justify-content-center">
@@ -50,5 +57,36 @@
   </div>
 
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const backgroundMusic = document.getElementById('backgroundMusic');
+    const playMusicBtn = document.getElementById('playMusicBtn');
+
+    backgroundMusic.volume = 0.5; // Set volume to 50%
+
+    // Try to autoplay (might be blocked by browser)
+    backgroundMusic.play().catch(function(error) {
+      console.log('Autoplay prevented: ' + error);
+      // Button will be used to start music
+    });
+
+    // Play/pause music when button is clicked
+    playMusicBtn.addEventListener('click', function() {
+      if (backgroundMusic.paused) {
+        backgroundMusic.play();
+        playMusicBtn.textContent = 'Pause Music';
+      } else {
+        backgroundMusic.pause();
+        playMusicBtn.textContent = 'Play Music';
+      }
+    });
+
+    // Update button text based on initial audio state
+    backgroundMusic.addEventListener('playing', function() {
+      playMusicBtn.textContent = 'Pause Music';
+    });
+  });
+</script>
 </body>
 </html>

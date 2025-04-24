@@ -9,6 +9,12 @@ document.addEventListener('DOMContentLoaded', function () {
     let draggedPiece = null;
     let currentImageIndex = 0;
 
+    // Get audio elements
+    const gameStartSound = document.getElementById('gameStartSound');
+    const correctAnswerSound = document.getElementById('correctAnswerSound');
+    const wrongAnswerSound = document.getElementById('wrongAnswerSound');
+    const puzzleSolvedSound = document.getElementById('puzzleSolvedSound');
+
     const imagesAndAnswers = {
         hewan: [
             {src: "assets/img/hewan/kucing.jpg", answers: ["kucing", "cat"]},
@@ -73,6 +79,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
         function loadNextImage() {
             if (currentImageIndex >= imagesAndAnswers[category].length) {
+                // Stop the game start sound when all puzzles are completed
+                gameStartSound.pause();
+                gameStartSound.currentTime = 0;
+                gameStartSound.loop = false;
+
                 alert("Gambar sudah selesai!");
                 backToHome.click();
                 return;
@@ -81,6 +92,16 @@ document.addEventListener('DOMContentLoaded', function () {
             const currentImage = imagesAndAnswers[category][currentImageIndex];
 
             console.log(currentImage.src);
+
+            // Stop any existing game start sound before starting a new one
+            gameStartSound.pause();
+            gameStartSound.currentTime = 0;
+
+            // Play game start sound
+            gameStartSound.loop = true; // Make the sound loop continuously
+            gameStartSound.play().catch(function(error) {
+                console.log('Sound play prevented: ' + error);
+            });
 
             setupPuzzle(currentImage.src);
 
@@ -96,6 +117,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // add event listener to the backToHome button
         backToHome.addEventListener("click", function () {
+            // Stop the game start sound before navigating back to home
+            gameStartSound.pause();
+            gameStartSound.currentTime = 0;
+            gameStartSound.loop = false;
+
             window.location.href = "index.html";
         });
 
@@ -175,6 +201,23 @@ document.addEventListener('DOMContentLoaded', function () {
             });
 
             if (isCorrect) {
+                // Stop the game start sound when puzzle is solved
+                gameStartSound.pause();
+                gameStartSound.currentTime = 0;
+                gameStartSound.loop = false;
+
+                // Play puzzle solved sound
+                puzzleSolvedSound.currentTime = 0; // Reset sound to beginning
+                puzzleSolvedSound.play().catch(function(error) {
+                    console.log('Sound play prevented: ' + error);
+                });
+
+                // Stop the puzzle solved sound after 3 seconds
+                setTimeout(function() {
+                    puzzleSolvedSound.pause();
+                    puzzleSolvedSound.currentTime = 0;
+                }, 3000);
+
                 setTimeout(() => {
                     alert("Puzzle selesai! Silakan jawab nama gambar.");
                     userAnswer.disabled = false; // Enable input when puzzle is solved
@@ -204,6 +247,18 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             if (correctAnswers.includes(answer)) {
+                // Play correct answer sound
+                correctAnswerSound.currentTime = 0; // Reset sound to beginning
+                correctAnswerSound.play().catch(function(error) {
+                    console.log('Sound play prevented: ' + error);
+                });
+
+                // Stop the correct answer sound after 3 seconds
+                setTimeout(function() {
+                    correctAnswerSound.pause();
+                    correctAnswerSound.currentTime = 0;
+                }, 3000);
+
                 score += 10;
                 alert(`✅ Jawaban Benar success ${correctAnswer} ${answer}`);
                 userAnswer.disabled = true;
@@ -211,6 +266,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 currentImageIndex++;
                 loadNextImage();
             } else {
+                // Play wrong answer sound
+                wrongAnswerSound.currentTime = 0; // Reset sound to beginning
+                wrongAnswerSound.play().catch(function(error) {
+                    console.log('Sound play prevented: ' + error);
+                });
+
                 alert(`❌ Jawaban Salah error ${correctAnswer} ${answer}`);
                 hasAnswered = false;
                 userAnswer.disabled = false;
