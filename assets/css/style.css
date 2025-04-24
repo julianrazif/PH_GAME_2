@@ -1,0 +1,186 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 0.875rem;
+    text-size-adjust: 100%;
+}
+
+/* Styling for game image */
+#gameImage {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+/* Responsive base font size */
+@media (max-width: 576px) {
+    html {
+        font-size: 14px;
+    }
+}
+
+@media (min-width: 577px) and (max-width: 768px) {
+    html {
+        font-size: 15px;
+    }
+}
+
+@media (min-width: 769px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+html, body {
+    text-rendering: geometricPrecision;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+
+.container {
+    padding: clamp(10px, 3vw, 30px);
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.bg-container {
+    min-height: 100vh;
+    background-image: url("../img/halaman_utama_1.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.card {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+    overflow: hidden;
+    width: 100%;
+    transition: transform 0.3s;
+    border: none;
+    margin-bottom: clamp(10px, 2vw, 20px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 576px) {
+    .card {
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media (min-width: 577px) and (max-width: 768px) {
+    .card {
+        max-width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+.card .card-img-top {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16/11;
+    object-fit: cover;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+@media (max-width: 576px) {
+    .card .card-img-top {
+        aspect-ratio: 4/3; /* Slightly taller images on mobile */
+    }
+}
+
+.card .card-body {
+    padding: clamp(10px, 3vw, 20px);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 60px;
+}
+
+@media (max-width: 576px) {
+    .card .card-body {
+        min-height: 50px;
+    }
+}
+
+.text {
+    margin-bottom: clamp(20px, 4vw, 40px);
+    width: 100%;
+}
+
+.text h1 {
+    text-align: center;
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    padding: 0 10px;
+}
+
+@media (max-width: 576px) {
+    .text {
+        margin-bottom: 15px;
+    }
+
+    .text h1 {
+        font-size: 1.5rem;
+    }
+}
+
+a {
+    text-decoration: none;
+}
+
+.btn {
+    font-size: clamp(0.8rem, 2vw, 1rem);
+    padding: clamp(6px, 1.5vw, 10px) clamp(12px, 3vw, 20px);
+    background: #ff9800;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    width: fit-content;
+    display: inline-block;
+}
+
+.btn:hover {
+    background: #e68900;
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 576px) {
+    .btn {
+        font-size: 0.85rem;
+        padding: 6px 12px;
+        letter-spacing: 0.3px;
+    }
+}
