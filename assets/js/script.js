@@ -90,6 +90,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // start the game
         loadNextImage();
+
+        const backToHome = document.getElementById("backToHome");
+        // add event listener to the backToHome button
+        backToHome.addEventListener("click", function () {
+            window.location.href = "index.html";
+        });
     } else {
         // Handle case when category doesn't exist or has no images
         console.warn("No images available for category:", category);

@@ -111,6 +111,13 @@ html, body {
     min-height: 60px;
 }
 
+/* Specific styling for card-body in game.html */
+#cardGameImage .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 @media (max-width: 576px) {
     .card .card-body {
         min-height: 50px;
