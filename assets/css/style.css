@@ -8,16 +8,6 @@
     text-size-adjust: 100%;
 }
 
-/* Styling for game image */
-#gameImage {
-    max-width: 100%;
-    height: auto;
-    object-fit: contain;
-    display: block;
-    margin: 0 auto;
-    padding: 10px;
-}
-
 /* Responsive base font size */
 @media (max-width: 576px) {
     html {
