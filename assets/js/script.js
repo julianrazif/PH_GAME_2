@@ -9,8 +9,6 @@ document.addEventListener('DOMContentLoaded', function () {
     let draggedPiece = null;
     let currentImageIndex = 0;
 
-    // const gameImage = document.getElementById("gameImage");
-
     const imagesAndAnswers = {
         hewan: [
             {src: "assets/img/hewan/kucing.jpg", answers: ["kucing", "cat"]},
@@ -31,7 +29,12 @@ document.addEventListener('DOMContentLoaded', function () {
         ],
     };
 
+    const userAnswer = document.getElementById("userAnswer");
+    const submitAnswer = document.getElementById("submitAnswer");
     const backToHome = document.getElementById("backToHome");
+
+    let hasAnswered = false;
+    let score = 0;
 
     // Update the heading based on the category
     if (headingElement) {
@@ -70,28 +73,22 @@ document.addEventListener('DOMContentLoaded', function () {
 
         function loadNextImage() {
             if (currentImageIndex >= imagesAndAnswers[category].length) {
+                alert("Gambar sudah selesai!");
+                backToHome.click();
                 return;
             }
 
             const currentImage = imagesAndAnswers[category][currentImageIndex];
-            // gameImage.src = currentImage.src;
 
             console.log(currentImage.src);
 
             setupPuzzle(currentImage.src);
 
-            // Add error handling for image loading
-            // gameImage.onerror = function() {
-            //     console.error("Failed to load image:", currentImage.src);
-            //     // Try to load next image or show a placeholder
-            //     currentImageIndex++;
-            //     if (currentImageIndex < imagesAndAnswers[category].length) {
-            //         loadNextImage();
-            //     } else {
-            //         // If all images fail, set a default image or show an error message
-            //         gameImage.src = "assets/img/error_not_found.jpg";
-            //     }
-            // };
+            hasAnswered = false;
+
+            userAnswer.value = "";
+            userAnswer.disabled = true; // Disable input by default until puzzle is solved
+            userAnswer.focus();
         }
 
         // start the game
@@ -180,17 +177,46 @@ document.addEventListener('DOMContentLoaded', function () {
             if (isCorrect) {
                 setTimeout(() => {
                     alert("Puzzle selesai! Silakan jawab nama gambar.");
-                    document.querySelector(".input-container").style.display = "flex";
+                    userAnswer.disabled = false; // Enable input when puzzle is solved
+                    userAnswer.focus();
                 }, 300);
             }
         }
-    } else {
-        // Handle case when category doesn't exist or has no images
-        console.warn("No images available for category:", category);
-        // Set a default image based on category
-        // if (category && gameImage) {
-        //     gameImage.src = "assets/img/error_not_found.jpg";
-        // }
-    }
 
+        // Event listener untuk tombol cek jawaban
+        submitAnswer.addEventListener("click", checkAnswer);
+
+        function checkAnswer() {
+            if (hasAnswered) return;
+
+            const answer = userAnswer.value.trim().toLowerCase();
+
+            if (answer === "") {
+                alert("Silakan masukkan jawaban terlebih dahulu!");
+                userAnswer.focus();
+                return;
+            }
+
+            const correctAnswers = imagesAndAnswers[category][currentImageIndex].answers;
+            let correctAnswer = correctAnswers[0];
+            if (correctAnswers.includes(answer)) {
+                correctAnswer = answer;
+            }
+
+            if (correctAnswers.includes(answer)) {
+                score += 10;
+                alert(`✅ Jawaban Benar success ${correctAnswer} ${answer}`);
+                userAnswer.disabled = true;
+                hasAnswered = true;
+                currentImageIndex++;
+                loadNextImage();
+            } else {
+                alert(`❌ Jawaban Salah error ${correctAnswer} ${answer}`);
+                hasAnswered = false;
+                userAnswer.disabled = false;
+                userAnswer.focus();
+            }
+        }
+
+    }
 });
