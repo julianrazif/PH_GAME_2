@@ -1,0 +1,840 @@
+Index: game.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!DOCTYPE html>\r\n<html lang=\"en\">\r\n<head>\r\n    <meta charset=\"UTF-8\"/>\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"/>\r\n    <title>Tebak Gambar Puzzle</title>\r\n\r\n    <link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\r\n    <link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>\r\n    <link href=\"https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap\" rel=\"stylesheet\">\r\n\r\n    <link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css\" rel=\"stylesheet\" integrity=\"sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC\" crossorigin=\"anonymous\">\r\n    <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js\" integrity=\"<KEY>\" crossorigin=\"anonymous\"></script>\r\n\r\n    <link rel=\"stylesheet\" href=\"assets/css/style.css\">\r\n\r\n    <!-- Audio elements for game sounds -->\r\n    <audio id=\"gameStartSound\">\r\n        <source src=\"assets/audio/game_start.mp3\" type=\"audio/mpeg\">\r\n        Your browser does not support the audio element.\r\n    </audio>\r\n    <audio id=\"correctAnswerSound\">\r\n        <source src=\"assets/audio/correct_answer.mp3\" type=\"audio/mpeg\">\r\n        Your browser does not support the audio element.\r\n    </audio>\r\n    <audio id=\"wrongAnswerSound\">\r\n        <source src=\"assets/audio/wrong_answer.mp3\" type=\"audio/mpeg\">\r\n        Your browser does not support the audio element.\r\n    </audio>\r\n    <audio id=\"puzzleSolvedSound\">\r\n        <source src=\"assets/audio/puzzle_solved.mp3\" type=\"audio/mpeg\">\r\n        Your browser does not support the audio element.\r\n    </audio>\r\n    <audio id=\"endgamedSound\">\r\n        <source src=\"assets/audio/end_gamed.mp3\" type=\"audio/mpeg\">\r\n        Your browser does not support the audio element.\r\n    </audio>\r\n</head>\r\n<body class=\"bg-container\">\r\n\r\n    <div class=\"toast-container position-fixed bottom-0 end-0 p-3\">\r\n        <div id=\"customToast\" class=\"toast text-white\" role=\"alert\" aria-live=\"assertive\" aria-atomic=\"true\" data-bs-delay=\"3000\">\r\n            <div class=\"toast-body\" id=\"toastBody\"></div>\r\n        </div>\r\n    </div>\r\n<div class=\"container\">\r\n    <div class=\"text\">\r\n        <h1>Tebak Gambar</h1>\r\n    </div>\r\n    <div class=\"row row-cols-1 g-4 justify-content-center\">\r\n        <div class=\"col-6\">\r\n            <div id=\"cardGameImage\" class=\"card h-100\">\r\n                <div id=\"puzzle-board\" class=\"card-img-top\"></div>\r\n<!--                <img id=\"puzzle-board\" src=\"assets/img/error_not_found.jpg\" class=\"card-img-top\" alt=\"Tebak gambar\"/>-->\r\n                <div class=\"card-body\">\r\n                    <div class=\"row my-1\">\r\n                        <input type=\"text\" id=\"userAnswer\" placeholder=\"Masukkan jawaban...\"/>\r\n                    </div>\r\n                    <div class=\"row my-1\">\r\n                        <button id=\"submitAnswer\" class=\"btn\">Jawaban</button>\r\n                    </div>\r\n                    <div class=\"row my-1\">\r\n                        <button id=\"backToHome\" class=\"btn\">Kembali ke Home</button>\r\n                    </div>\r\n                    <div class=\"score-display\">\r\n                        <p>Score: <span id=\"score\" >0</span></p>\r\n                    </div>\r\n                </div>      \r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n</div>\r\n<div id=\"modal\" class=\"modal\">\r\n    <div class=\"modal-content\">\r\n        <p id=\"modalMessage\"></p>\r\n        <button id=\"modalOkButton\" class=\"ok-button\">OK</button>\r\n    </div>\r\n</div>\r\n    <script src=\"assets/js/script.js\"></script>\r\n</body>\r\n</html>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/game.html b/game.html
+--- a/game.html	(revision d9de04c26c27e3020a1115982d713526adc122ee)
++++ b/game.html	(date 1746248057317)
+@@ -1,82 +1,82 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+-    <meta charset="UTF-8"/>
+-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+-    <title>Tebak Gambar Puzzle</title>
++  <meta charset="UTF-8"/>
++  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
++  <title>Tebak Gambar Puzzle</title>
+ 
+-    <link rel="preconnect" href="https://fonts.googleapis.com">
+-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
++  <link rel="preconnect" href="https://fonts.googleapis.com">
++  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
++  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+ 
+-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="<KEY>" crossorigin="anonymous"></script>
++  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
++  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="<KEY>" crossorigin="anonymous"></script>
+ 
+-    <link rel="stylesheet" href="assets/css/style.css">
++  <link rel="stylesheet" href="assets/css/style.css">
+ 
+-    <!-- Audio elements for game sounds -->
+-    <audio id="gameStartSound">
+-        <source src="assets/audio/game_start.mp3" type="audio/mpeg">
+-        Your browser does not support the audio element.
+-    </audio>
+-    <audio id="correctAnswerSound">
+-        <source src="assets/audio/correct_answer.mp3" type="audio/mpeg">
+-        Your browser does not support the audio element.
+-    </audio>
+-    <audio id="wrongAnswerSound">
+-        <source src="assets/audio/wrong_answer.mp3" type="audio/mpeg">
+-        Your browser does not support the audio element.
+-    </audio>
+-    <audio id="puzzleSolvedSound">
+-        <source src="assets/audio/puzzle_solved.mp3" type="audio/mpeg">
+-        Your browser does not support the audio element.
+-    </audio>
+-    <audio id="endgamedSound">
+-        <source src="assets/audio/end_gamed.mp3" type="audio/mpeg">
+-        Your browser does not support the audio element.
+-    </audio>
++  <!-- Audio elements for game sounds -->
++  <audio id="gameStartSound">
++    <source src="assets/audio/game_start.mp3" type="audio/mpeg">
++    Your browser does not support the audio element.
++  </audio>
++  <audio id="correctAnswerSound">
++    <source src="assets/audio/correct_answer.mp3" type="audio/mpeg">
++    Your browser does not support the audio element.
++  </audio>
++  <audio id="wrongAnswerSound">
++    <source src="assets/audio/wrong_answer.mp3" type="audio/mpeg">
++    Your browser does not support the audio element.
++  </audio>
++  <audio id="puzzleSolvedSound">
++    <source src="assets/audio/puzzle_solved.mp3" type="audio/mpeg">
++    Your browser does not support the audio element.
++  </audio>
++  <audio id="endgamedSound">
++    <source src="assets/audio/end_gamed.mp3" type="audio/mpeg">
++    Your browser does not support the audio element.
++  </audio>
+ </head>
+ <body class="bg-container">
+ 
+-    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+-        <div id="customToast" class="toast text-white" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000">
+-            <div class="toast-body" id="toastBody"></div>
+-        </div>
+-    </div>
++<div class="toast-container position-fixed bottom-0 end-0 p-3">
++  <div id="customToast" class="toast text-white" role="alert" aria-live="assertive" aria-atomic="true"
++       data-bs-delay="3000">
++    <div class="toast-body" id="toastBody"></div>
++  </div>
++</div>
+ <div class="container">
+-    <div class="text">
+-        <h1>Tebak Gambar</h1>
+-    </div>
+-    <div class="row row-cols-1 g-4 justify-content-center">
+-        <div class="col-6">
+-            <div id="cardGameImage" class="card h-100">
+-                <div id="puzzle-board" class="card-img-top"></div>
+-<!--                <img id="puzzle-board" src="assets/img/error_not_found.jpg" class="card-img-top" alt="Tebak gambar"/>-->
+-                <div class="card-body">
+-                    <div class="row my-1">
+-                        <input type="text" id="userAnswer" placeholder="Masukkan jawaban..."/>
+-                    </div>
+-                    <div class="row my-1">
+-                        <button id="submitAnswer" class="btn">Jawaban</button>
+-                    </div>
+-                    <div class="row my-1">
+-                        <button id="backToHome" class="btn">Kembali ke Home</button>
+-                    </div>
+-                    <div class="score-display">
+-                        <p>Score: <span id="score" >0</span></p>
+-                    </div>
+-                </div>      
+-            </div>
+-        </div>
+-    </div>
++  <div class="text">
++    <h1>Tebak Gambar</h1>
++  </div>
++  <div class="row row-cols-1 g-4 justify-content-center">
++    <div class="col-6">
++      <div id="cardGameImage" class="card h-100">
++        <div id="puzzle-board" class="card-img-top"></div>
++        <div class="card-body">
++          <div class="row my-1">
++            <input type="text" id="userAnswer" placeholder="Masukkan jawaban..."/>
++          </div>
++          <div class="row my-1">
++            <button id="submitAnswer" class="btn">Jawaban</button>
++          </div>
++          <div class="row my-1">
++            <button id="backToHome" class="btn">Kembali ke Home</button>
++          </div>
++          <div class="score-display">
++            <p>Score: <span id="score">0</span></p>
++          </div>
++        </div>
++      </div>
++    </div>
++  </div>
+ 
+ </div>
+ <div id="modal" class="modal">
+-    <div class="modal-content">
+-        <p id="modalMessage"></p>
+-        <button id="modalOkButton" class="ok-button">OK</button>
+-    </div>
++  <div class="modal-content">
++    <p id="modalMessage"></p>
++    <button id="modalOkButton" class="ok-button">OK</button>
++  </div>
+ </div>
+-    <script src="assets/js/script.js"></script>
++<script src="assets/js/script.js"></script>
+ </body>
+ </html>
+Index: assets/js/script.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>document.addEventListener('DOMContentLoaded', function () {\r\n\r\n    // Get the category parameter from URL\r\n    const category = getUrlParameter('category');\r\n    // Get the h1 element in the text div\r\n    const headingElement = document.querySelector('.text h1');\r\n    // Get the board element\r\n    const board = document.getElementById(\"puzzle-board\");\r\n    let draggedPiece = null;\r\n    let currentImageIndex = 0;\r\n\r\n    // Get audio elements\r\n    const gameStartSound = document.getElementById('gameStartSound');\r\n    const correctAnswerSound = document.getElementById('correctAnswerSound');\r\n    const wrongAnswerSound = document.getElementById('wrongAnswerSound');\r\n    const puzzleSolvedSound = document.getElementById('puzzleSolvedSound');\r\n\r\n    const imagesAndAnswers = {\r\n        hewan: [\r\n            {src: \"assets/img/hewan/kucing.jpg\", answers: [\"kucing\"]},\r\n            {src: \"assets/img/hewan/buaya.jpg\", answers: [\"buaya\"]},\r\n            {src: \"assets/img/hewan/jerapah.jpg\", answers: [\"jerapah\"]},\r\n            {src: \"assets/img/hewan/kangguru.jpg\", answers: [\"kangguru\"]},\r\n            {src: \"assets/img/hewan/kuda.jpg\", answers: [\"kuda\"]},\r\n            {src: \"assets/img/hewan/harimau.jpg\", answers: [\"harimau\"]},\r\n            {src: \"assets/img/hewan/rusa.jpg\", answers: [\"rusa\"]},\r\n            {src: \"assets/img/hewan/anjing.jpg\", answers: [\"anjing\"]},\r\n            {src: \"assets/img/hewan/kudanil.jpg\", answers: [\"kuda nil\",\"kudanil\"]},\r\n            {src: \"assets/img/hewan/singa.jpg\", answers: [\"singa\"]},\r\n        ],\r\n        buah: [\r\n            {src: \"assets/img/buah/apel.jpg\", answers: [\"apel\"]},\r\n            {src: \"assets/img/buah/nanas.jpg\", answers: [\"nanas\"]},\r\n            {src: \"assets/img/buah/melon.jpg\", answers: [\"melon\"]},\r\n            {src: \"assets/img/buah/pisang.jpg\", answers: [\"pisang\"]},\r\n            {src: \"assets/img/buah/anggur.jpg\", answers: [\"anggur\"]},\r\n            {src: \"assets/img/buah/mangga.jpg\", answers: [\"mangga\"]},\r\n            {src: \"assets/img/buah/semangka.jpg\", answers: [\"semangka\"]},\r\n            {src: \"assets/img/buah/alpukat.jpg\", answers: [\"alpukat\"]},\r\n            {src: \"assets/img/buah/strawberry.jpg\", answers: [\"strawberry\"]},\r\n            {src: \"assets/img/buah/jeruk.jpg\", answers: [\"jeruk\"]},\r\n        ],\r\n        pekerjaan: [\r\n            {src: \"assets/img/pekerjaan/pemadam.jpg\", answers: [\"pemadam kebakaran\",\"pemadam\"]},\r\n            {src: \"assets/img/pekerjaan/koki.jpg\", answers: [\"koki\",\"chef\" ]},\r\n            {src: \"assets/img/pekerjaan/dokter.jpg\", answers: [\"dokter\", \"dokter hewan\"]},\r\n        ],\r\n    };\r\n\r\n    const userAnswer = document.getElementById(\"userAnswer\");\r\n    const submitAnswer = document.getElementById(\"submitAnswer\");\r\n    const backToHome = document.getElementById(\"backToHome\");\r\n\r\n    let hasAnswered = false;\r\n    let score = 0;\r\n\r\n    function showModal(message, callback) {\r\n        const modal = document.getElementById('modal');\r\n        const modalMessage = document.getElementById('modalMessage');\r\n        const modalOkButton = document.getElementById('modalOkButton');\r\n    \r\n        modalMessage.textContent = message;\r\n        modal.style.display = 'flex';\r\n    \r\n        // Definisikan handler DULU\r\n        function modalOkButtonClickHandler() {\r\n            modal.style.display = 'none';\r\n            if (typeof callback === 'function') {\r\n                callback(); // panggil hanya jika callback valid\r\n            }\r\n        }\r\n        modalOkButton.replaceWith(modalOkButton.cloneNode(true)); // Cara instan untuk hapus semua event listener\r\n        const newModalOkButton = document.getElementById('modalOkButton');\r\n        newModalOkButton.addEventListener('click', modalOkButtonClickHandler);\r\n    }\r\n\r\n    function showToast(playerAnswer, correctAnswer) {\r\n        const toast = document.getElementById('customToast');\r\n        const toastBody = document.getElementById('toastBody');\r\n\r\n        let isCorrect = playerAnswer.trim().toLowerCase() === correctAnswer.toLowerCase();\r\n        let message = `Jawaban Anda: <strong>${playerAnswer}</strong><br>`;\r\n\r\n        if (isCorrect) {\r\n            message += `<span style=\"color: #c8ffcc;\">✅ Jawaban Anda benar!</span>`;\r\n            toast.classList.remove(\"bg-danger\");\r\n            toast.classList.add(\"bg-success\");\r\n        } else {\r\n            message += `<span style=\"color: #ffcccc;\">❌ Jawaban yang benar: <strong>${correctAnswer}</strong></span>`;\r\n            toast.classList.remove(\"bg-success\");\r\n            toast.classList.add(\"bg-danger\");\r\n            wrongAnswerSound.play();\r\n        }\r\n\r\n        toastBody.innerHTML = message;\r\n\r\n        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toast);\r\n        toastBootstrap.show();\r\n    }\r\n\r\n    submitAnswer.addEventListener(\"click\", function () {\r\n        if (hasAnswered) return;\r\n\r\n        const currentData = imagesAndAnswers[category][currentImageIndex];\r\n        const playerAnswer = userAnswer.value.trim();\r\n\r\n        if (playerAnswer === \"\") return;\r\n    });\r\n\r\n    // Update the heading based on the category\r\n    if (headingElement) {\r\n        if (category === 'hewan') {\r\n            headingElement.textContent = 'Tebak Nama Hewan';\r\n        } else if (category === 'buah') {\r\n            headingElement.textContent = 'Tebak Nama Buah';\r\n        } else if (category === 'pekerjaan') {\r\n            headingElement.textContent = 'Tebak Nama Pekerjaan';\r\n        } else {\r\n            // Default text if no category or unknown category\r\n            headingElement.textContent = 'Tebak Gambar';\r\n        }\r\n    }\r\n\r\n    // Function to get URL parameters\r\n    function getUrlParameter(name) {\r\n        name = name.replace(/[\\[]/, '\\\\[').replace(/[\\]]/, '\\\\]');\r\n        const regex = new RegExp('[\\\\?&]' + name + '=([^&#]*)');\r\n        const results = regex.exec(location.search);\r\n        return results === null ? '' : decodeURIComponent(results[1].replace(/\\+/g, ' '));\r\n    }\r\n\r\n    // function to shuffle an array\r\n    function shuffleArray(array) {\r\n        for (let i = array.length - 1; i > 0; i--) {\r\n            const j = Math.floor(Math.random() * (i + 1));\r\n            [array[i], array[j]] = [array[j], array[i]];\r\n        }\r\n    }\r\n\r\n    // Check if the category exists and has images\r\n    if (category && imagesAndAnswers[category] && imagesAndAnswers[category].length > 0) {\r\n        // shuffle the images and answers\r\n        shuffleArray(imagesAndAnswers[category]);\r\n\r\n        function loadNextImage() {\r\n            if (currentImageIndex >= imagesAndAnswers[category].length) {\r\n                // Stop the game start sound when all puzzles are completed\r\n                gameStartSound.pause();\r\n                gameStartSound.currentTime = 0;\r\n                gameStartSound.loop = false;\r\n                \r\n        // Play score sound\r\n        const endGameSound = document.getElementById('endgamedSound');\r\n        endGameSound.currentTime = 0;\r\n        endGameSound.play();\r\n\r\n\r\n                showModal(`Selesai! Total skor anda: ${score}`, () => {\r\n            // When OK is clicked, go back to home\r\n            backToHome.click();\r\n        });\r\n\r\n        return; // Don't do anything further, waiting for OK click to go back\r\n    }\r\n\r\n\r\n            const currentImage = imagesAndAnswers[category][currentImageIndex];\r\n\r\n            console.log(currentImage.src);\r\n\r\n            // Stop any existing game start sound before starting a new one\r\n            gameStartSound.pause();\r\n            gameStartSound.currentTime = 0;\r\n\r\n            // Play game start sound\r\n            gameStartSound.loop = true; // Make the sound loop continuously\r\n            gameStartSound.play().catch(function(error) {\r\n                console.log('Sound play prevented: ' + error);\r\n            });\r\n\r\n            setupPuzzle(currentImage.src);\r\n\r\n            hasAnswered = false;\r\n\r\n            userAnswer.value = \"\";\r\n            userAnswer.disabled = true; // Disable input by default until puzzle is solved\r\n            userAnswer.focus();\r\n        }\r\n\r\n        // start the game\r\n        loadNextImage();\r\n\r\n        // add event listener to the backToHome button\r\n        backToHome.addEventListener(\"click\", function () {\r\n            // Stop the game start sound before navigating back to home\r\n            gameStartSound.pause();\r\n            gameStartSound.currentTime = 0;\r\n            gameStartSound.loop = false;\r\n\r\n            window.location.href = \"index.html\";\r\n        });\r\n\r\n        function setupPuzzle(imagePath) {\r\n            board.innerHTML = \"\";\r\n            const indices = [0, 1, 2, 3, 4, 5, 6, 7, 8];\r\n            shuffleArray(indices);\r\n            indices.forEach((index, i) => {\r\n                const piece = document.createElement(\"div\");\r\n                piece.classList.add(\"puzzle-piece\");\r\n                piece.setAttribute(\"data-position\", index); // posisi aslinya\r\n                piece.setAttribute(\"data-index\", i); // posisi sekarang\r\n                piece.style.backgroundImage = `url('${imagePath}')`;\r\n                piece.setAttribute(\"draggable\", true);\r\n                piece.style.backgroundPosition = getBackgroundPosition(index);\r\n\r\n                addDragEvents(piece);\r\n                board.appendChild(piece);\r\n            });\r\n        }\r\n\r\n        function getBackgroundPosition(index) {\r\n            switch (index) {\r\n                case 0: return \"0% 0%\";\r\n                case 1: return \"50% 0%\";\r\n                case 2: return \"100% 0%\";\r\n                case 3: return \"0% 50%\";\r\n                case 4: return \"50% 50%\";\r\n                case 5: return \"100% 50%\";\r\n                case 6: return \"0% 100%\";\r\n                case 7: return \"50% 100%\";\r\n                case 8: return \"100% 100%\";\r\n            }\r\n        }\r\n\r\n        function addDragEvents(piece) {\r\n            piece.addEventListener(\"dragstart\", (e) => {\r\n                draggedPiece = e.target;\r\n            });\r\n\r\n            piece.addEventListener(\"dragover\", (e) => {\r\n                e.preventDefault();\r\n            });\r\n\r\n            piece.addEventListener(\"drop\", (e) => {\r\n                e.preventDefault();\r\n                const target = e.target;\r\n\r\n                if (draggedPiece && draggedPiece !== target) {\r\n                    const draggedIndex = draggedPiece.getAttribute(\"data-index\");\r\n                    const targetIndex = target.getAttribute(\"data-index\");\r\n\r\n                    // Tukar elemen di DOM\r\n                    const temp = document.createElement(\"div\");\r\n                    board.insertBefore(temp, draggedPiece);\r\n                    board.insertBefore(draggedPiece, target);\r\n                    board.insertBefore(target, temp);\r\n                    board.removeChild(temp);\r\n\r\n                    // Update data-index\r\n                    draggedPiece.setAttribute(\"data-index\", targetIndex);\r\n                    target.setAttribute(\"data-index\", draggedIndex);\r\n                }\r\n\r\n                checkPuzzleSolved();\r\n            });\r\n        }\r\n\r\n        function checkPuzzleSolved() {\r\n            const pieces = document.querySelectorAll(\".puzzle-piece\");\r\n            const sorted = Array.from(pieces).sort(\r\n                (a, b) => parseInt(a.getAttribute(\"data-index\")) - parseInt(b.getAttribute(\"data-index\"))\r\n            );\r\n\r\n            const isCorrect = sorted.every((piece, index) => {\r\n                return parseInt(piece.getAttribute(\"data-position\")) === index;\r\n            });\r\n\r\n            if (isCorrect) {\r\n                // Stop the game start sound when puzzle is solved\r\n                gameStartSound.pause();\r\n                gameStartSound.currentTime = 0;\r\n                gameStartSound.loop = false;\r\n\r\n                // Play puzzle solved sound\r\n                puzzleSolvedSound.currentTime = 0; // Reset sound to beginning\r\n                puzzleSolvedSound.play().catch(function(error) {\r\n                    console.log('Sound play prevented: ' + error);\r\n                });\r\n\r\n                // Stop the puzzle solved sound after 3 seconds\r\n                setTimeout(function() {\r\n                    puzzleSolvedSound.pause();\r\n                    puzzleSolvedSound.currentTime = 0;\r\n                }, 3000);\r\n\r\n                setTimeout(() => {\r\n                    showModal(\"Puzzle selesai! Silakan jawab nama gambar.\");\r\n                    userAnswer.disabled = false; // Enable input when puzzle is solved\r\n                    userAnswer.focus();\r\n                }, 300);\r\n            }\r\n        }\r\n\r\n        // Event listener untuk tombol cek jawaban\r\n        submitAnswer.addEventListener(\"click\", checkAnswer);\r\n\r\n        if (playerAnswer === \"\") return;\r\n        function checkAnswer() {\r\n            if (hasAnswered) return;\r\n\r\n            const answer = userAnswer.value.trim().toLowerCase();\r\n\r\n            if (answer === \"\") {\r\n                showModal(\"Silakan Selesaikan puzzle terlebih dahulu dan pasti kan untuk mengisi jawaban!\");\r\n                userAnswer.focus();\r\n                return;\r\n            }\r\n\r\n            const correctAnswers = imagesAndAnswers[category][currentImageIndex].answers;\r\n            let correctAnswer = correctAnswers[0];\r\n            if (correctAnswers.includes(answer)) {\r\n                correctAnswer = answer;\r\n            }\r\n\r\n            hasAnswered = true;\r\n            userAnswer.disabled = true;\r\n            if (correctAnswers.includes(answer)) {\r\n                // Play correct answer sound\r\n                correctAnswerSound.currentTime = 0; // Reset sound to beginning\r\n                correctAnswerSound.play().catch(function(error) {\r\n                    console.log('Sound play prevented: ' + error);\r\n                });\r\n\r\n                // Stop the correct answer sound after 3 seconds\r\n                setTimeout(function() {\r\n                    correctAnswerSound.pause();\r\n                    correctAnswerSound.currentTime = 0;\r\n                }, 3000);\r\n\r\n                score += 10;\r\n                showToast(answer, correctAnswer);\r\n                currentImageIndex++;\r\n                document.getElementById(\"score\").textContent = `Score: ${score}`;\r\n                setTimeout(() => {\r\n                    loadNextImage();\r\n            }, 3000);\r\n            } else {\r\n                // Play wrong answer sound\r\n                wrongAnswerSound.currentTime = 0; // Reset sound to beginning\r\n                wrongAnswerSound.play().catch(function(error) {\r\n                    console.log('Sound play prevented: ' + error);\r\n                });\r\n\r\n                showToast(answer, correctAnswer);\r\n                    currentImageIndex++;\r\n                        setTimeout(() => {\r\n                        loadNextImage();\r\n                }, 1000);\r\n            }\r\n        }\r\n\r\n    }\r\n});\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/assets/js/script.js b/assets/js/script.js
+--- a/assets/js/script.js	(revision d9de04c26c27e3020a1115982d713526adc122ee)
++++ b/assets/js/script.js	(date 1746248286460)
+@@ -1,363 +1,374 @@
+ document.addEventListener('DOMContentLoaded', function () {
+ 
+-    // Get the category parameter from URL
+-    const category = getUrlParameter('category');
+-    // Get the h1 element in the text div
+-    const headingElement = document.querySelector('.text h1');
+-    // Get the board element
+-    const board = document.getElementById("puzzle-board");
+-    let draggedPiece = null;
+-    let currentImageIndex = 0;
++  // Get the category parameter from URL
++  const category = getUrlParameter('category');
++  // Get the h1 element in the text div
++  const headingElement = document.querySelector('.text h1');
++  // Get the board element
++  const board = document.getElementById("puzzle-board");
++  let draggedPiece = null;
++  let currentImageIndex = 0;
+ 
+-    // Get audio elements
+-    const gameStartSound = document.getElementById('gameStartSound');
+-    const correctAnswerSound = document.getElementById('correctAnswerSound');
+-    const wrongAnswerSound = document.getElementById('wrongAnswerSound');
+-    const puzzleSolvedSound = document.getElementById('puzzleSolvedSound');
++  // Get audio elements
++  const gameStartSound = document.getElementById('gameStartSound');
++  const correctAnswerSound = document.getElementById('correctAnswerSound');
++  const wrongAnswerSound = document.getElementById('wrongAnswerSound');
++  const puzzleSolvedSound = document.getElementById('puzzleSolvedSound');
+ 
+-    const imagesAndAnswers = {
+-        hewan: [
+-            {src: "assets/img/hewan/kucing.jpg", answers: ["kucing"]},
+-            {src: "assets/img/hewan/buaya.jpg", answers: ["buaya"]},
+-            {src: "assets/img/hewan/jerapah.jpg", answers: ["jerapah"]},
+-            {src: "assets/img/hewan/kangguru.jpg", answers: ["kangguru"]},
+-            {src: "assets/img/hewan/kuda.jpg", answers: ["kuda"]},
+-            {src: "assets/img/hewan/harimau.jpg", answers: ["harimau"]},
+-            {src: "assets/img/hewan/rusa.jpg", answers: ["rusa"]},
+-            {src: "assets/img/hewan/anjing.jpg", answers: ["anjing"]},
+-            {src: "assets/img/hewan/kudanil.jpg", answers: ["kuda nil","kudanil"]},
+-            {src: "assets/img/hewan/singa.jpg", answers: ["singa"]},
+-        ],
+-        buah: [
+-            {src: "assets/img/buah/apel.jpg", answers: ["apel"]},
+-            {src: "assets/img/buah/nanas.jpg", answers: ["nanas"]},
+-            {src: "assets/img/buah/melon.jpg", answers: ["melon"]},
+-            {src: "assets/img/buah/pisang.jpg", answers: ["pisang"]},
+-            {src: "assets/img/buah/anggur.jpg", answers: ["anggur"]},
+-            {src: "assets/img/buah/mangga.jpg", answers: ["mangga"]},
+-            {src: "assets/img/buah/semangka.jpg", answers: ["semangka"]},
+-            {src: "assets/img/buah/alpukat.jpg", answers: ["alpukat"]},
+-            {src: "assets/img/buah/strawberry.jpg", answers: ["strawberry"]},
+-            {src: "assets/img/buah/jeruk.jpg", answers: ["jeruk"]},
+-        ],
+-        pekerjaan: [
+-            {src: "assets/img/pekerjaan/pemadam.jpg", answers: ["pemadam kebakaran","pemadam"]},
+-            {src: "assets/img/pekerjaan/koki.jpg", answers: ["koki","chef" ]},
+-            {src: "assets/img/pekerjaan/dokter.jpg", answers: ["dokter", "dokter hewan"]},
+-        ],
+-    };
++  const imagesAndAnswers = {
++    hewan: [
++      {src: "assets/img/hewan/kucing.jpg", answers: ["kucing"]},
++      {src: "assets/img/hewan/buaya.jpg", answers: ["buaya"]},
++      {src: "assets/img/hewan/jerapah.jpg", answers: ["jerapah"]},
++      {src: "assets/img/hewan/kangguru.jpg", answers: ["kangguru"]},
++      {src: "assets/img/hewan/kuda.jpg", answers: ["kuda"]},
++      {src: "assets/img/hewan/harimau.jpg", answers: ["harimau"]},
++      {src: "assets/img/hewan/rusa.jpg", answers: ["rusa"]},
++      {src: "assets/img/hewan/anjing.jpg", answers: ["anjing"]},
++      {src: "assets/img/hewan/kudanil.jpg", answers: ["kuda nil", "kudanil"]},
++      {src: "assets/img/hewan/singa.jpg", answers: ["singa"]},
++    ],
++    buah: [
++      {src: "assets/img/buah/apel.jpg", answers: ["apel"]},
++      {src: "assets/img/buah/nanas.jpg", answers: ["nanas"]},
++      {src: "assets/img/buah/melon.jpg", answers: ["melon"]},
++      {src: "assets/img/buah/pisang.jpg", answers: ["pisang"]},
++      {src: "assets/img/buah/anggur.jpg", answers: ["anggur"]},
++      {src: "assets/img/buah/mangga.jpg", answers: ["mangga"]},
++      {src: "assets/img/buah/semangka.jpg", answers: ["semangka"]},
++      {src: "assets/img/buah/alpukat.jpg", answers: ["alpukat"]},
++      {src: "assets/img/buah/strawberry.jpg", answers: ["strawberry"]},
++      {src: "assets/img/buah/jeruk.jpg", answers: ["jeruk"]},
++    ],
++    pekerjaan: [
++      {src: "assets/img/pekerjaan/pemadam.jpg", answers: ["pemadam kebakaran", "pemadam"]},
++      {src: "assets/img/pekerjaan/koki.jpg", answers: ["koki", "chef"]},
++      {src: "assets/img/pekerjaan/dokter.jpg", answers: ["dokter", "dokter hewan"]},
++    ],
++  };
+ 
+-    const userAnswer = document.getElementById("userAnswer");
+-    const submitAnswer = document.getElementById("submitAnswer");
+-    const backToHome = document.getElementById("backToHome");
++  const userAnswer = document.getElementById("userAnswer");
++  const submitAnswer = document.getElementById("submitAnswer");
++  const backToHome = document.getElementById("backToHome");
+ 
+-    let hasAnswered = false;
+-    let score = 0;
++  let hasAnswered = false;
++  let score = 0;
+ 
+-    function showModal(message, callback) {
+-        const modal = document.getElementById('modal');
+-        const modalMessage = document.getElementById('modalMessage');
+-        const modalOkButton = document.getElementById('modalOkButton');
+-    
+-        modalMessage.textContent = message;
+-        modal.style.display = 'flex';
+-    
+-        // Definisikan handler DULU
+-        function modalOkButtonClickHandler() {
+-            modal.style.display = 'none';
+-            if (typeof callback === 'function') {
+-                callback(); // panggil hanya jika callback valid
+-            }
+-        }
+-        modalOkButton.replaceWith(modalOkButton.cloneNode(true)); // Cara instan untuk hapus semua event listener
+-        const newModalOkButton = document.getElementById('modalOkButton');
+-        newModalOkButton.addEventListener('click', modalOkButtonClickHandler);
+-    }
++  function showModal(message, callback) {
++    const modal = document.getElementById('modal');
++    const modalMessage = document.getElementById('modalMessage');
++    const modalOkButton = document.getElementById('modalOkButton');
++
++    modalMessage.textContent = message;
++    modal.style.display = 'flex';
++
++    // Definisikan handler DULU
++    function modalOkButtonClickHandler() {
++      modal.style.display = 'none';
++      if (typeof callback === 'function') {
++        callback(); // panggil hanya jika callback valid
++      }
++    }
++
++    modalOkButton.replaceWith(modalOkButton.cloneNode(true)); // Cara instan untuk hapus semua event listener
++    const newModalOkButton = document.getElementById('modalOkButton');
++    newModalOkButton.addEventListener('click', modalOkButtonClickHandler);
++  }
+ 
+-    function showToast(playerAnswer, correctAnswer) {
+-        const toast = document.getElementById('customToast');
+-        const toastBody = document.getElementById('toastBody');
++  function showToast(playerAnswer, correctAnswer) {
++    const toast = document.getElementById('customToast');
++    const toastBody = document.getElementById('toastBody');
+ 
+-        let isCorrect = playerAnswer.trim().toLowerCase() === correctAnswer.toLowerCase();
+-        let message = `Jawaban Anda: <strong>${playerAnswer}</strong><br>`;
++    let isCorrect = playerAnswer.trim().toLowerCase() === correctAnswer.toLowerCase();
++    let message = `Jawaban Anda: <strong>${playerAnswer}</strong><br>`;
+ 
+-        if (isCorrect) {
+-            message += `<span style="color: #c8ffcc;">✅ Jawaban Anda benar!</span>`;
+-            toast.classList.remove("bg-danger");
+-            toast.classList.add("bg-success");
+-        } else {
+-            message += `<span style="color: #ffcccc;">❌ Jawaban yang benar: <strong>${correctAnswer}</strong></span>`;
+-            toast.classList.remove("bg-success");
+-            toast.classList.add("bg-danger");
+-            wrongAnswerSound.play();
+-        }
++    if (isCorrect) {
++      message += `<span style="color: #c8ffcc;">✅ Jawaban Anda benar!</span>`;
++      toast.classList.remove("bg-danger");
++      toast.classList.add("bg-success");
++    } else {
++      message += `<span style="color: #ffcccc;">❌ Jawaban yang benar: <strong>${correctAnswer}</strong></span>`;
++      toast.classList.remove("bg-success");
++      toast.classList.add("bg-danger");
++      wrongAnswerSound.play();
++    }
+ 
+-        toastBody.innerHTML = message;
++    toastBody.innerHTML = message;
+ 
+-        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toast);
+-        toastBootstrap.show();
+-    }
++    const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toast);
++    toastBootstrap.show();
++  }
+ 
+-    submitAnswer.addEventListener("click", function () {
+-        if (hasAnswered) return;
++  submitAnswer.addEventListener("click", function () {
++    if (hasAnswered) return;
+ 
+-        const currentData = imagesAndAnswers[category][currentImageIndex];
+-        const playerAnswer = userAnswer.value.trim();
+-
+-        if (playerAnswer === "") return;
+-    });
++    const currentData = imagesAndAnswers[category][currentImageIndex];
++    const playerAnswer = userAnswer.value.trim();
++  });
+ 
+-    // Update the heading based on the category
+-    if (headingElement) {
+-        if (category === 'hewan') {
+-            headingElement.textContent = 'Tebak Nama Hewan';
+-        } else if (category === 'buah') {
+-            headingElement.textContent = 'Tebak Nama Buah';
+-        } else if (category === 'pekerjaan') {
+-            headingElement.textContent = 'Tebak Nama Pekerjaan';
+-        } else {
+-            // Default text if no category or unknown category
+-            headingElement.textContent = 'Tebak Gambar';
+-        }
+-    }
++  // Update the heading based on the category
++  if (headingElement) {
++    if (category === 'hewan') {
++      headingElement.textContent = 'Tebak Nama Hewan';
++    } else if (category === 'buah') {
++      headingElement.textContent = 'Tebak Nama Buah';
++    } else if (category === 'pekerjaan') {
++      headingElement.textContent = 'Tebak Nama Pekerjaan';
++    } else {
++      // Default text if no category or unknown category
++      headingElement.textContent = 'Tebak Gambar';
++    }
++  }
+ 
+-    // Function to get URL parameters
+-    function getUrlParameter(name) {
+-        name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+-        const regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+-        const results = regex.exec(location.search);
+-        return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+-    }
++  // Function to get URL parameters
++  function getUrlParameter(name) {
++    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
++    const regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
++    const results = regex.exec(location.search);
++    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
++  }
+ 
+-    // function to shuffle an array
+-    function shuffleArray(array) {
+-        for (let i = array.length - 1; i > 0; i--) {
+-            const j = Math.floor(Math.random() * (i + 1));
+-            [array[i], array[j]] = [array[j], array[i]];
+-        }
+-    }
++  // function to shuffle an array
++  function shuffleArray(array) {
++    for (let i = array.length - 1; i > 0; i--) {
++      const j = Math.floor(Math.random() * (i + 1));
++      [array[i], array[j]] = [array[j], array[i]];
++    }
++  }
+ 
+-    // Check if the category exists and has images
+-    if (category && imagesAndAnswers[category] && imagesAndAnswers[category].length > 0) {
+-        // shuffle the images and answers
+-        shuffleArray(imagesAndAnswers[category]);
++  // Check if the category exists and has images
++  if (category && imagesAndAnswers[category] && imagesAndAnswers[category].length > 0) {
++    // shuffle the images and answers
++    shuffleArray(imagesAndAnswers[category]);
+ 
+-        function loadNextImage() {
+-            if (currentImageIndex >= imagesAndAnswers[category].length) {
+-                // Stop the game start sound when all puzzles are completed
+-                gameStartSound.pause();
+-                gameStartSound.currentTime = 0;
+-                gameStartSound.loop = false;
+-                
++    function loadNextImage() {
++      if (currentImageIndex >= imagesAndAnswers[category].length) {
++        // Stop the game start sound when all puzzles are completed
++        gameStartSound.pause();
++        gameStartSound.currentTime = 0;
++        gameStartSound.loop = false;
++
+         // Play score sound
+         const endGameSound = document.getElementById('endgamedSound');
+         endGameSound.currentTime = 0;
+         endGameSound.play();
+ 
+ 
+-                showModal(`Selesai! Total skor anda: ${score}`, () => {
+-            // When OK is clicked, go back to home
+-            backToHome.click();
++        showModal(`Selesai! Total skor anda: ${score}`, () => {
++          // When OK is clicked, go back to home
++          backToHome.click();
+         });
+ 
+         return; // Don't do anything further, waiting for OK click to go back
+-    }
++      }
+ 
+ 
+-            const currentImage = imagesAndAnswers[category][currentImageIndex];
++      const currentImage = imagesAndAnswers[category][currentImageIndex];
+ 
+-            console.log(currentImage.src);
++      console.log(currentImage.src);
+ 
+-            // Stop any existing game start sound before starting a new one
+-            gameStartSound.pause();
+-            gameStartSound.currentTime = 0;
++      // Stop any existing game start sound before starting a new one
++      gameStartSound.pause();
++      gameStartSound.currentTime = 0;
+ 
+-            // Play game start sound
+-            gameStartSound.loop = true; // Make the sound loop continuously
+-            gameStartSound.play().catch(function(error) {
+-                console.log('Sound play prevented: ' + error);
+-            });
++      // Play game start sound
++      gameStartSound.loop = true; // Make the sound loop continuously
++      gameStartSound.play().catch(function (error) {
++        console.log('Sound play prevented: ' + error);
++      });
+ 
+-            setupPuzzle(currentImage.src);
++      setupPuzzle(currentImage.src);
+ 
+-            hasAnswered = false;
++      hasAnswered = false;
+ 
+-            userAnswer.value = "";
+-            userAnswer.disabled = true; // Disable input by default until puzzle is solved
+-            userAnswer.focus();
+-        }
++      userAnswer.value = "";
++      userAnswer.disabled = true; // Disable input by default until puzzle is solved
++      userAnswer.focus();
++    }
+ 
+-        // start the game
+-        loadNextImage();
++    // start the game
++    loadNextImage();
+ 
+-        // add event listener to the backToHome button
+-        backToHome.addEventListener("click", function () {
+-            // Stop the game start sound before navigating back to home
+-            gameStartSound.pause();
+-            gameStartSound.currentTime = 0;
+-            gameStartSound.loop = false;
++    // add event listener to the backToHome button
++    backToHome.addEventListener("click", function () {
++      // Stop the game start sound before navigating back to home
++      gameStartSound.pause();
++      gameStartSound.currentTime = 0;
++      gameStartSound.loop = false;
+ 
+-            window.location.href = "index.html";
+-        });
++      window.location.href = "index.html";
++    });
+ 
+-        function setupPuzzle(imagePath) {
+-            board.innerHTML = "";
+-            const indices = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+-            shuffleArray(indices);
+-            indices.forEach((index, i) => {
+-                const piece = document.createElement("div");
+-                piece.classList.add("puzzle-piece");
+-                piece.setAttribute("data-position", index); // posisi aslinya
+-                piece.setAttribute("data-index", i); // posisi sekarang
+-                piece.style.backgroundImage = `url('${imagePath}')`;
+-                piece.setAttribute("draggable", true);
+-                piece.style.backgroundPosition = getBackgroundPosition(index);
++    function setupPuzzle(imagePath) {
++      board.innerHTML = "";
++      const indices = [0, 1, 2, 3, 4, 5, 6, 7, 8];
++      shuffleArray(indices);
++      indices.forEach((index, i) => {
++        const piece = document.createElement("div");
++        piece.classList.add("puzzle-piece");
++        piece.setAttribute("data-position", index); // posisi aslinya
++        piece.setAttribute("data-index", i); // posisi sekarang
++        piece.style.backgroundImage = `url('${imagePath}')`;
++        piece.setAttribute("draggable", true);
++        piece.style.backgroundPosition = getBackgroundPosition(index);
+ 
+-                addDragEvents(piece);
+-                board.appendChild(piece);
+-            });
+-        }
++        addDragEvents(piece);
++        board.appendChild(piece);
++      });
++    }
+ 
+-        function getBackgroundPosition(index) {
+-            switch (index) {
+-                case 0: return "0% 0%";
+-                case 1: return "50% 0%";
+-                case 2: return "100% 0%";
+-                case 3: return "0% 50%";
+-                case 4: return "50% 50%";
+-                case 5: return "100% 50%";
+-                case 6: return "0% 100%";
+-                case 7: return "50% 100%";
+-                case 8: return "100% 100%";
+-            }
+-        }
++    function getBackgroundPosition(index) {
++      switch (index) {
++        case 0:
++          return "0% 0%";
++        case 1:
++          return "50% 0%";
++        case 2:
++          return "100% 0%";
++        case 3:
++          return "0% 50%";
++        case 4:
++          return "50% 50%";
++        case 5:
++          return "100% 50%";
++        case 6:
++          return "0% 100%";
++        case 7:
++          return "50% 100%";
++        case 8:
++          return "100% 100%";
++      }
++    }
+ 
+-        function addDragEvents(piece) {
+-            piece.addEventListener("dragstart", (e) => {
+-                draggedPiece = e.target;
+-            });
++    function addDragEvents(piece) {
++      piece.addEventListener("dragstart", (e) => {
++        draggedPiece = e.target;
++      });
+ 
+-            piece.addEventListener("dragover", (e) => {
+-                e.preventDefault();
+-            });
++      piece.addEventListener("dragover", (e) => {
++        e.preventDefault();
++      });
+ 
+-            piece.addEventListener("drop", (e) => {
+-                e.preventDefault();
+-                const target = e.target;
++      piece.addEventListener("drop", (e) => {
++        e.preventDefault();
++        const target = e.target;
+ 
+-                if (draggedPiece && draggedPiece !== target) {
+-                    const draggedIndex = draggedPiece.getAttribute("data-index");
+-                    const targetIndex = target.getAttribute("data-index");
++        if (draggedPiece && draggedPiece !== target) {
++          const draggedIndex = draggedPiece.getAttribute("data-index");
++          const targetIndex = target.getAttribute("data-index");
+ 
+-                    // Tukar elemen di DOM
+-                    const temp = document.createElement("div");
+-                    board.insertBefore(temp, draggedPiece);
+-                    board.insertBefore(draggedPiece, target);
+-                    board.insertBefore(target, temp);
+-                    board.removeChild(temp);
++          // Tukar elemen di DOM
++          const temp = document.createElement("div");
++          board.insertBefore(temp, draggedPiece);
++          board.insertBefore(draggedPiece, target);
++          board.insertBefore(target, temp);
++          board.removeChild(temp);
+ 
+-                    // Update data-index
+-                    draggedPiece.setAttribute("data-index", targetIndex);
+-                    target.setAttribute("data-index", draggedIndex);
+-                }
++          // Update data-index
++          draggedPiece.setAttribute("data-index", targetIndex);
++          target.setAttribute("data-index", draggedIndex);
++        }
+ 
+-                checkPuzzleSolved();
+-            });
+-        }
++        checkPuzzleSolved();
++      });
++    }
+ 
+-        function checkPuzzleSolved() {
+-            const pieces = document.querySelectorAll(".puzzle-piece");
+-            const sorted = Array.from(pieces).sort(
+-                (a, b) => parseInt(a.getAttribute("data-index")) - parseInt(b.getAttribute("data-index"))
+-            );
++    function checkPuzzleSolved() {
++      const pieces = document.querySelectorAll(".puzzle-piece");
++      const sorted = Array.from(pieces).sort(
++        (a, b) => parseInt(a.getAttribute("data-index")) - parseInt(b.getAttribute("data-index"))
++      );
+ 
+-            const isCorrect = sorted.every((piece, index) => {
+-                return parseInt(piece.getAttribute("data-position")) === index;
+-            });
++      const isCorrect = sorted.every((piece, index) => {
++        return parseInt(piece.getAttribute("data-position")) === index;
++      });
+ 
+-            if (isCorrect) {
+-                // Stop the game start sound when puzzle is solved
+-                gameStartSound.pause();
+-                gameStartSound.currentTime = 0;
+-                gameStartSound.loop = false;
++      if (isCorrect) {
++        // Stop the game start sound when puzzle is solved
++        gameStartSound.pause();
++        gameStartSound.currentTime = 0;
++        gameStartSound.loop = false;
+ 
+-                // Play puzzle solved sound
+-                puzzleSolvedSound.currentTime = 0; // Reset sound to beginning
+-                puzzleSolvedSound.play().catch(function(error) {
+-                    console.log('Sound play prevented: ' + error);
+-                });
++        // Play puzzle solved sound
++        puzzleSolvedSound.currentTime = 0; // Reset sound to beginning
++        puzzleSolvedSound.play().catch(function (error) {
++          console.log('Sound play prevented: ' + error);
++        });
+ 
+-                // Stop the puzzle solved sound after 3 seconds
+-                setTimeout(function() {
+-                    puzzleSolvedSound.pause();
+-                    puzzleSolvedSound.currentTime = 0;
+-                }, 3000);
++        // Stop the puzzle solved sound after 3 seconds
++        setTimeout(function () {
++          puzzleSolvedSound.pause();
++          puzzleSolvedSound.currentTime = 0;
++        }, 3000);
+ 
+-                setTimeout(() => {
+-                    showModal("Puzzle selesai! Silakan jawab nama gambar.");
+-                    userAnswer.disabled = false; // Enable input when puzzle is solved
+-                    userAnswer.focus();
+-                }, 300);
+-            }
+-        }
++        setTimeout(() => {
++          showModal("Puzzle selesai! Silakan jawab nama gambar.");
++          userAnswer.disabled = false; // Enable input when puzzle is solved
++          userAnswer.focus();
++        }, 300);
++      }
++    }
+ 
+-        // Event listener untuk tombol cek jawaban
+-        submitAnswer.addEventListener("click", checkAnswer);
++    // Event listener untuk tombol cek jawaban
++    submitAnswer.addEventListener("click", checkAnswer);
+ 
+-        if (playerAnswer === "") return;
+-        function checkAnswer() {
+-            if (hasAnswered) return;
++    if (playerAnswer === "") {
++      return;
++    }
++
++      function checkAnswer() {
++        if (hasAnswered) return;
+ 
+-            const answer = userAnswer.value.trim().toLowerCase();
++        const answer = userAnswer.value.trim().toLowerCase();
+ 
+-            if (answer === "") {
+-                showModal("Silakan Selesaikan puzzle terlebih dahulu dan pasti kan untuk mengisi jawaban!");
+-                userAnswer.focus();
+-                return;
+-            }
++        if (answer === "") {
++          showModal("Silakan Selesaikan puzzle terlebih dahulu dan pasti kan untuk mengisi jawaban!");
++          userAnswer.focus();
++          return;
++        }
+ 
+-            const correctAnswers = imagesAndAnswers[category][currentImageIndex].answers;
+-            let correctAnswer = correctAnswers[0];
+-            if (correctAnswers.includes(answer)) {
+-                correctAnswer = answer;
+-            }
++        const correctAnswers = imagesAndAnswers[category][currentImageIndex].answers;
++        let correctAnswer = correctAnswers[0];
++        if (correctAnswers.includes(answer)) {
++          correctAnswer = answer;
++        }
+ 
+-            hasAnswered = true;
+-            userAnswer.disabled = true;
+-            if (correctAnswers.includes(answer)) {
+-                // Play correct answer sound
+-                correctAnswerSound.currentTime = 0; // Reset sound to beginning
+-                correctAnswerSound.play().catch(function(error) {
+-                    console.log('Sound play prevented: ' + error);
+-                });
++        hasAnswered = true;
++        userAnswer.disabled = true;
++        if (correctAnswers.includes(answer)) {
++          // Play correct answer sound
++          correctAnswerSound.currentTime = 0; // Reset sound to beginning
++          correctAnswerSound.play().catch(function (error) {
++            console.log('Sound play prevented: ' + error);
++          });
+ 
+-                // Stop the correct answer sound after 3 seconds
+-                setTimeout(function() {
+-                    correctAnswerSound.pause();
+-                    correctAnswerSound.currentTime = 0;
+-                }, 3000);
++          // Stop the correct answer sound after 3 seconds
++          setTimeout(function () {
++            correctAnswerSound.pause();
++            correctAnswerSound.currentTime = 0;
++          }, 3000);
+ 
+-                score += 10;
+-                showToast(answer, correctAnswer);
+-                currentImageIndex++;
+-                document.getElementById("score").textContent = `Score: ${score}`;
+-                setTimeout(() => {
+-                    loadNextImage();
+-            }, 3000);
+-            } else {
+-                // Play wrong answer sound
+-                wrongAnswerSound.currentTime = 0; // Reset sound to beginning
+-                wrongAnswerSound.play().catch(function(error) {
+-                    console.log('Sound play prevented: ' + error);
+-                });
++          score += 10;
++          showToast(answer, correctAnswer);
++          currentImageIndex++;
++          document.getElementById("score").textContent = `Score: ${score}`;
++          setTimeout(() => {
++            loadNextImage();
++          }, 3000);
++        } else {
++          // Play wrong answer sound
++          wrongAnswerSound.currentTime = 0; // Reset sound to beginning
++          wrongAnswerSound.play().catch(function (error) {
++            console.log('Sound play prevented: ' + error);
++          });
+ 
+-                showToast(answer, correctAnswer);
+-                    currentImageIndex++;
+-                        setTimeout(() => {
+-                        loadNextImage();
+-                }, 1000);
+-            }
+-        }
++          showToast(answer, correctAnswer);
++          currentImageIndex++;
++          setTimeout(() => {
++            loadNextImage();
++          }, 1000);
++        }
++      }
+ 
+-    }
++  }
+ });

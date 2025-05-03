@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Puzzle Singa 2x3</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f4f4f4;
+    }
+
+    .game-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .puzzle-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 2px;
+      width: 384px;
+      height: 256px;
+      border: 4px solid #333;
+      /*background-image: url('assets/img/hewan/singa/singa.jpg');*/
+      /*background-size: cover;*/
+      /*background-position: center;*/
+      /*opacity: 0.8;*/
+    }
+
+    .puzzle-piece {
+      width: 128px;
+      height: 128px;
+      cursor: grab;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    .controls {
+      display: flex;
+      gap: 10px;
+    }
+
+    button {
+      padding: 8px 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .info-panel {
+      display: flex;
+      justify-content: space-between;
+      width: 384px;
+      margin-top: 10px;
+    }
+
+    .message {
+      margin-top: 10px;
+      font-weight: bold;
+      height: 20px;
+    }
+  </style>
+</head>
+<body>
+<div class="game-container">
+  <div class="puzzle-container" id="puzzle">
+    <!-- Potongan gambar akan dimuat lewat JS -->
+  </div>
+
+  <div class="controls">
+    <button id="reset-btn">Reset Puzzle</button>
+    <button id="check-btn">Check Solution</button>
+  </div>
+
+  <div class="info-panel">
+    <div>Time: <span id="timer">00:00</span></div>
+    <div>Moves: <span id="moves">0</span></div>
+  </div>
+
+  <div class="message" id="message"></div>
+</div>
+
+<script>
+  // DOM Elements
+  const container = document.getElementById("puzzle");
+  const resetBtn = document.getElementById("reset-btn");
+  const checkBtn = document.getElementById("check-btn");
+  const timerElement = document.getElementById("timer");
+  const movesElement = document.getElementById("moves");
+  const messageElement = document.getElementById("message");
+
+  // Game variables
+  const rows = 2;
+  const cols = 3;
+  let moves = 0;
+  let timerInterval;
+  let startTime;
+  let dragged;
+  let isGameStarted = false;
+
+  // Create original pieces array with correct positions
+  const originalPieces = [];
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      originalPieces.push({
+        row: r, 
+        col: c, 
+        src: `assets/img/hewan/singa/piece_${r}_${c}.png`,
+        correctIndex: r * cols + c
+      });
+    }
+  }
+
+  // Initialize the game
+  function initGame() {
+    // Clear the container
+    container.innerHTML = '';
+
+    // Reset game variables
+    moves = 0;
+    movesElement.textContent = moves;
+    messageElement.textContent = '';
+
+    // Stop timer if running
+    if (timerInterval) {
+      clearInterval(timerInterval);
+      timerInterval = null;
+    }
+    timerElement.textContent = '00:00';
+
+    // Shuffle pieces
+    const shuffled = [...originalPieces].sort(() => Math.random() - 0.5);
+
+    // Create and append puzzle pieces
+    shuffled.forEach((piece, index) => {
+      const img = document.createElement("img");
+      img.src = piece.src;
+      img.className = "puzzle-piece";
+      img.draggable = true;
+      img.dataset.index = index;
+      img.dataset.correctIndex = piece.correctIndex;
+      container.appendChild(img);
+    });
+
+    // Add event listeners to pieces
+    setupDragAndDrop();
+
+    isGameStarted = false;
+  }
+
+  // Set up drag and drop functionality
+  function setupDragAndDrop() {
+    document.querySelectorAll(".puzzle-piece").forEach(piece => {
+      piece.addEventListener("dragstart", (e) => {
+        dragged = e.target;
+
+        // Start the timer on first move if not already started
+        if (!isGameStarted) {
+          startTimer();
+          isGameStarted = true;
+        }
+      });
+
+      piece.addEventListener("dragover", (e) => {
+        e.preventDefault();
+      });
+
+      piece.addEventListener("drop", (e) => {
+        e.preventDefault();
+        if (dragged && dragged !== e.target) {
+          // Swap src and correctIndex
+          const tempSrc = dragged.src;
+          const tempCorrectIndex = dragged.dataset.correctIndex;
+
+          dragged.src = e.target.src;
+          dragged.dataset.correctIndex = e.target.dataset.correctIndex;
+
+          e.target.src = tempSrc;
+          e.target.dataset.correctIndex = tempCorrectIndex;
+
+          // Increment moves counter
+          moves++;
+          movesElement.textContent = moves;
+        }
+      });
+    });
+  }
+
+  // Start the timer
+  function startTimer() {
+    startTime = new Date();
+    timerInterval = setInterval(updateTimer, 1000);
+  }
+
+  // Update the timer display
+  function updateTimer() {
+    const currentTime = new Date();
+    const elapsedTime = Math.floor((currentTime - startTime) / 1000);
+    const minutes = Math.floor(elapsedTime / 60).toString().padStart(2, '0');
+    const seconds = (elapsedTime % 60).toString().padStart(2, '0');
+    timerElement.textContent = `${minutes}:${seconds}`;
+  }
+
+  // Check if the puzzle is solved
+  function checkSolution() {
+    let isSolved = true;
+    const pieces = document.querySelectorAll(".puzzle-piece");
+
+    pieces.forEach((piece, currentIndex) => {
+      if (parseInt(piece.dataset.correctIndex) !== currentIndex) {
+        isSolved = false;
+      }
+    });
+
+    if (isSolved) {
+      clearInterval(timerInterval);
+      messageElement.textContent = "Congratulations! Puzzle solved!";
+      messageElement.style.color = "green";
+    } else {
+      messageElement.textContent = "Not quite right. Keep trying!";
+      messageElement.style.color = "red";
+
+      // Clear message after 3 seconds
+      setTimeout(() => {
+        messageElement.textContent = "";
+      }, 3000);
+    }
+
+    return isSolved;
+  }
+
+  // Event listeners for buttons
+  resetBtn.addEventListener("click", initGame);
+  checkBtn.addEventListener("click", checkSolution);
+
+  // Initialize the game on load
+  initGame();
+</script>
+</body>
+</html>
