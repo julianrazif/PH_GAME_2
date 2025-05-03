@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Puzzle Singa 3x3</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f4f4f4;
+    }
+    .puzzle-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      gap: 2px;
+      width: 384px;
+      height: 384px;
+      border: 4px solid #333;
+    }
+    .puzzle-piece {
+      width: 128px;
+      height: 128px;
+      cursor: grab;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+<body>
+  <div class="puzzle-container" id="puzzle">
+    <!-- Potongan gambar akan dimuat lewat JS -->
+  </div>
+
+  <script>
+    const container = document.getElementById("puzzle");
+    const rows = 3;
+    const cols = 2;
+
+    const pieces = [];
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+        pieces.push({ row: r, col: c, src: `singa_puzzle_pieces/piece_${r}_${c}.png` });
+      }
+    }
+
+    // Acak posisi awal
+    const shuffled = [...pieces].sort(() => Math.random() - 0.5);
+
+    shuffled.forEach((piece, index) => {
+      const img = document.createElement("img");
+      img.src = piece.src;
+      img.className = "puzzle-piece";
+      img.draggable = true;
+      img.dataset.index = index;
+      container.appendChild(img);
+    });
+
+    let dragged;
+\
+    document.querySelectorAll(".puzzle-piece").forEach(piece => {
+      piece.addEventListener("dragstart", (e) => {
+        dragged = e.target;
+      });
+
+      piece.addEventListener("dragover", (e) => {
+        e.preventDefault();
+      });
+
+      piece.addEventListener("drop", (e) => {
+        e.preventDefault();
+        if (dragged && dragged !== e.target) {
+          // Swap src
+          const tempSrc = dragged.src;
+          dragged.src = e.target.src;
+          e.target.src = tempSrc;
+        }
+      });
+    });
+  </script>
+</body>
+</html>
