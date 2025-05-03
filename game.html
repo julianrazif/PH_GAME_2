@@ -31,13 +31,22 @@
         <source src="assets/audio/puzzle_solved.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
+    <audio id="endgamedSound">
+        <source src="assets/audio/end_gamed.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
 </head>
 <body class="bg-container">
+
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="customToast" class="toast text-white" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000">
+            <div class="toast-body" id="toastBody"></div>
+        </div>
+    </div>
 <div class="container">
     <div class="text">
         <h1>Tebak Gambar</h1>
     </div>
-
     <div class="row row-cols-1 g-4 justify-content-center">
         <div class="col-6">
             <div id="cardGameImage" class="card h-100">
@@ -53,13 +62,21 @@
                     <div class="row my-1">
                         <button id="backToHome" class="btn">Kembali ke Home</button>
                     </div>
-                </div>
+                    <div class="score-display">
+                        <p>Score: <span id="score" >0</span></p>
+                    </div>
+                </div>      
             </div>
         </div>
     </div>
 
 </div>
-
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <p id="modalMessage"></p>
+        <button id="modalOkButton" class="ok-button">OK</button>
+    </div>
+</div>
     <script src="assets/js/script.js"></script>
 </body>
 </html>

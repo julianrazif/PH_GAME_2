@@ -1,92 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Tebak Gambar Puzzle</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tebak Gambar Puzzle</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="<KEY>" crossorigin="anonymous"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="<KEY>"
+      crossorigin="anonymous"
+    ></script>
 
-  <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css" />
 
-  <!-- Audio element for background music -->
-  <audio id="backgroundMusic" loop>
-    <source src="assets/audio/background_music.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
-</head>
-<body class="bg-container">
-<div class="container">
-  <div class="text">
-    <h1>Menu Utama</h1>
-    <button id="playMusicBtn" class="btn btn-sm btn-primary mb-3">Play Music</button>
-  </div>
+    <!-- Audio element for background music -->
+    <audio id="backgroundMusic" loop>
+      <source src="assets/audio/background_music.mp3" type="audio/mpeg" />
+      Your browser does not support the audio element.
+    </audio>
+  </head>
+  <body class="bg-container">
+    <div class="container">
+      <div class="text">
+        <h1>Menu Utama</h1>
+        <button id="playMusicBtn" class="btn btn-sm btn-primary mb-3">
+          Play Music
+        </button>
+      </div>
 
-  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 justify-content-center">
-    <div class="col">
-      <div id="cardHewan" class="card h-100">
-        <img src="assets/img/card_hewan.jpg" class="card-img-top" alt="hewan">
-        <div class="card-body">
-          <a href="game.html?category=hewan" class="btn">Tebak Nama Hewan</a>
+      <div
+        class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 justify-content-center"
+      >
+        <div class="col">
+          <div id="cardHewan" class="card h-100">
+            <img
+              src="assets/img/card_hewan.jpg"
+              class="card-img-top"
+              alt="hewan"
+            />
+            <div class="card-body">
+              <a href="game.html?category=hewan" class="btn"
+                >Tebak Nama Hewan</a
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div id="cardBuah" class="card h-100">
+            <img
+              src="assets/img/card_buah.jpg"
+              class="card-img-top"
+              alt="buah"
+            />
+            <div class="card-body">
+              <a href="game.html?category=buah" class="btn">Tebak Nama Buah</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div id="cardPekerjaan" class="card h-100">
+            <img
+              src="assets/img/card_pekerjaan.jpg"
+              class="card-img-top"
+              alt="pekerjaan"
+            />
+            <div class="card-body">
+              <a href="game.html?category=pekerjaan" class="btn"
+                >Tebak Nama Pekerjaan</a
+              >
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="col">
-      <div id="cardBuah" class="card h-100">
-        <img src="assets/img/card_buah.jpg" class="card-img-top" alt="buah">
-        <div class="card-body">
-          <a href="game.html?category=buah" class="btn">Tebak Nama Buah</a>
-        </div>
-      </div>
-    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const backgroundMusic = document.getElementById("backgroundMusic");
+        const playMusicBtn = document.getElementById("playMusicBtn");
 
-    <div class="col">
-      <div id="cardPekerjaan" class="card h-100">
-        <img src="assets/img/card_pekerjaan.jpg" class="card-img-top" alt="pekerjaan">
-        <div class="card-body">
-          <a href="game.html?category=pekerjaan" class="btn">Tebak Nama Pekerjaan</a>
-        </div>
-      </div>
-    </div>
-  </div>
+        backgroundMusic.volume = 0.5; // Set volume to 50%
 
-</div>
+        // Try to autoplay (might be blocked by browser)
+        backgroundMusic.play().catch(function (error) {
+          console.log("Autoplay prevented: " + error);
+          // Button will be used to start music
+        });
 
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const backgroundMusic = document.getElementById('backgroundMusic');
-    const playMusicBtn = document.getElementById('playMusicBtn');
+        // Play/pause music when button is clicked
+        playMusicBtn.addEventListener("click", function () {
+          if (backgroundMusic.paused) {
+            backgroundMusic.play();
+            playMusicBtn.textContent = "Pause Music";
+          } else {
+            backgroundMusic.pause();
+            playMusicBtn.textContent = "Play Music";
+          }
+        });
 
-    backgroundMusic.volume = 0.5; // Set volume to 50%
-
-    // Try to autoplay (might be blocked by browser)
-    backgroundMusic.play().catch(function(error) {
-      console.log('Autoplay prevented: ' + error);
-      // Button will be used to start music
-    });
-
-    // Play/pause music when button is clicked
-    playMusicBtn.addEventListener('click', function() {
-      if (backgroundMusic.paused) {
-        backgroundMusic.play();
-        playMusicBtn.textContent = 'Pause Music';
-      } else {
-        backgroundMusic.pause();
-        playMusicBtn.textContent = 'Play Music';
-      }
-    });
-
-    // Update button text based on initial audio state
-    backgroundMusic.addEventListener('playing', function() {
-      playMusicBtn.textContent = 'Pause Music';
-    });
-  });
-</script>
-</body>
+        // Update button text based on initial audio state
+        backgroundMusic.addEventListener("playing", function () {
+          playMusicBtn.textContent = "Pause Music";
+        });
+      });
+    </script>
+  </body>
 </html>

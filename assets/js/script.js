@@ -17,21 +17,33 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const imagesAndAnswers = {
         hewan: [
-            {src: "assets/img/hewan/kucing.jpg", answers: ["kucing", "cat"]},
-            {src: "assets/img/hewan/buaya.jpg", answers: ["buaya", "crocodile"]},
-            {src: "assets/img/hewan/jerapah.jpg", answers: ["jerapah", "giraffe"]},
-            {src: "assets/img/hewan/rusa.jpg", answers: ["rusa", "deer"]},
-            {src: "assets/img/hewan/singa.jpg", answers: ["singa", "lion"]},
+            {src: "assets/img/hewan/kucing.jpg", answers: ["kucing"]},
+            {src: "assets/img/hewan/buaya.jpg", answers: ["buaya"]},
+            {src: "assets/img/hewan/jerapah.jpg", answers: ["jerapah"]},
+            {src: "assets/img/hewan/kangguru.jpg", answers: ["kangguru"]},
+            {src: "assets/img/hewan/kuda.jpg", answers: ["kuda"]},
+            {src: "assets/img/hewan/harimau.jpg", answers: ["harimau"]},
+            {src: "assets/img/hewan/rusa.jpg", answers: ["rusa"]},
+            {src: "assets/img/hewan/anjing.jpg", answers: ["anjing"]},
+            {src: "assets/img/hewan/kudanil.jpg", answers: ["kuda nil","kudanil"]},
+            {src: "assets/img/hewan/singa.jpg", answers: ["singa"]},
         ],
         buah: [
-            {src: "assets/img/buah/apel.jpg", answers: ["apel", "apple"]},
-            {src: "assets/img/buah/nanas.jpg", answers: ["nanas", "pineapple"]},
-            {src: "assets/img/buah/melon.jpg", answers: ["melon", "melon"]},
-            {src: "assets/img/buah/pisang.jpg", answers: ["pisang", "banana"]},
-            {src: "assets/img/buah/anggur.jpg", answers: ["anggur", "grapes"]},
+            {src: "assets/img/buah/apel.jpg", answers: ["apel"]},
+            {src: "assets/img/buah/nanas.jpg", answers: ["nanas"]},
+            {src: "assets/img/buah/melon.jpg", answers: ["melon"]},
+            {src: "assets/img/buah/pisang.jpg", answers: ["pisang"]},
+            {src: "assets/img/buah/anggur.jpg", answers: ["anggur"]},
+            {src: "assets/img/buah/mangga.jpg", answers: ["mangga"]},
+            {src: "assets/img/buah/semangka.jpg", answers: ["semangka"]},
+            {src: "assets/img/buah/alpukat.jpg", answers: ["alpukat"]},
+            {src: "assets/img/buah/strawberry.jpg", answers: ["strawberry"]},
+            {src: "assets/img/buah/jeruk.jpg", answers: ["jeruk"]},
         ],
         pekerjaan: [
-            // No images available for this category yet
+            {src: "assets/img/pekerjaan/pemadam.jpg", answers: ["pemadam kebakaran","pemadam"]},
+            {src: "assets/img/pekerjaan/koki.jpg", answers: ["koki","chef" ]},
+            {src: "assets/img/pekerjaan/dokter.jpg", answers: ["dokter", "dokter hewan"]},
         ],
     };
 
@@ -41,6 +53,59 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let hasAnswered = false;
     let score = 0;
+
+    function showModal(message, callback) {
+        const modal = document.getElementById('modal');
+        const modalMessage = document.getElementById('modalMessage');
+        const modalOkButton = document.getElementById('modalOkButton');
+    
+        modalMessage.textContent = message;
+        modal.style.display = 'flex';
+    
+        // Definisikan handler DULU
+        function modalOkButtonClickHandler() {
+            modal.style.display = 'none';
+            if (typeof callback === 'function') {
+                callback(); // panggil hanya jika callback valid
+            }
+        }
+        modalOkButton.replaceWith(modalOkButton.cloneNode(true)); // Cara instan untuk hapus semua event listener
+        const newModalOkButton = document.getElementById('modalOkButton');
+        newModalOkButton.addEventListener('click', modalOkButtonClickHandler);
+    }
+
+    function showToast(playerAnswer, correctAnswer) {
+        const toast = document.getElementById('customToast');
+        const toastBody = document.getElementById('toastBody');
+
+        let isCorrect = playerAnswer.trim().toLowerCase() === correctAnswer.toLowerCase();
+        let message = `Jawaban Anda: <strong>${playerAnswer}</strong><br>`;
+
+        if (isCorrect) {
+            message += `<span style="color: #c8ffcc;">✅ Jawaban Anda benar!</span>`;
+            toast.classList.remove("bg-danger");
+            toast.classList.add("bg-success");
+        } else {
+            message += `<span style="color: #ffcccc;">❌ Jawaban yang benar: <strong>${correctAnswer}</strong></span>`;
+            toast.classList.remove("bg-success");
+            toast.classList.add("bg-danger");
+            wrongAnswerSound.play();
+        }
+
+        toastBody.innerHTML = message;
+
+        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toast);
+        toastBootstrap.show();
+    }
+
+    submitAnswer.addEventListener("click", function () {
+        if (hasAnswered) return;
+
+        const currentData = imagesAndAnswers[category][currentImageIndex];
+        const playerAnswer = userAnswer.value.trim();
+
+        if (playerAnswer === "") return;
+    });
 
     // Update the heading based on the category
     if (headingElement) {
@@ -83,11 +148,21 @@ document.addEventListener('DOMContentLoaded', function () {
                 gameStartSound.pause();
                 gameStartSound.currentTime = 0;
                 gameStartSound.loop = false;
+                
+        // Play score sound
+        const endGameSound = document.getElementById('endgamedSound');
+        endGameSound.currentTime = 0;
+        endGameSound.play();
 
-                alert("Gambar sudah selesai!");
-                backToHome.click();
-                return;
-            }
+
+                showModal(`Selesai! Total skor anda: ${score}`, () => {
+            // When OK is clicked, go back to home
+            backToHome.click();
+        });
+
+        return; // Don't do anything further, waiting for OK click to go back
+    }
+
 
             const currentImage = imagesAndAnswers[category][currentImageIndex];
 
@@ -219,7 +294,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }, 3000);
 
                 setTimeout(() => {
-                    alert("Puzzle selesai! Silakan jawab nama gambar.");
+                    showModal("Puzzle selesai! Silakan jawab nama gambar.");
                     userAnswer.disabled = false; // Enable input when puzzle is solved
                     userAnswer.focus();
                 }, 300);
@@ -229,13 +304,14 @@ document.addEventListener('DOMContentLoaded', function () {
         // Event listener untuk tombol cek jawaban
         submitAnswer.addEventListener("click", checkAnswer);
 
+        if (playerAnswer === "") return;
         function checkAnswer() {
             if (hasAnswered) return;
 
             const answer = userAnswer.value.trim().toLowerCase();
 
             if (answer === "") {
-                alert("Silakan masukkan jawaban terlebih dahulu!");
+                showModal("Silakan Selesaikan puzzle terlebih dahulu dan pasti kan untuk mengisi jawaban!");
                 userAnswer.focus();
                 return;
             }
@@ -246,6 +322,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 correctAnswer = answer;
             }
 
+            hasAnswered = true;
+            userAnswer.disabled = true;
             if (correctAnswers.includes(answer)) {
                 // Play correct answer sound
                 correctAnswerSound.currentTime = 0; // Reset sound to beginning
@@ -260,11 +338,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 }, 3000);
 
                 score += 10;
-                alert(`✅ Jawaban Benar success ${correctAnswer} ${answer}`);
-                userAnswer.disabled = true;
-                hasAnswered = true;
+                showToast(answer, correctAnswer);
                 currentImageIndex++;
-                loadNextImage();
+                document.getElementById("score").textContent = `Score: ${score}`;
+                setTimeout(() => {
+                    loadNextImage();
+            }, 3000);
             } else {
                 // Play wrong answer sound
                 wrongAnswerSound.currentTime = 0; // Reset sound to beginning
@@ -272,10 +351,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     console.log('Sound play prevented: ' + error);
                 });
 
-                alert(`❌ Jawaban Salah error ${correctAnswer} ${answer}`);
-                hasAnswered = false;
-                userAnswer.disabled = false;
-                userAnswer.focus();
+                showToast(answer, correctAnswer);
+                    currentImageIndex++;
+                        setTimeout(() => {
+                        loadNextImage();
+                }, 1000);
             }
         }
 
