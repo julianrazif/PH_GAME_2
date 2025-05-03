@@ -1,269 +1,298 @@
 .modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    justify-content: center;
-    align-items: center;
-    z-index: 999;
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
 }
 
 .modal-content {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    width: 300px;
-    text-align: center;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  width: 300px;
+  text-align: center;
 }
 
 .ok-button {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 5px;
-    margin-top: 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 20px;
 }
 
 .ok-button:hover {
-    background-color: #45a049;
+  background-color: #45a049;
 }
+
 .toast-hidden {
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.5s ease, visibility 0.5s ease;
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: #333;
-    color: white;
-    padding: 12px 20px;
-    border-radius: 8px;
-    z-index: 1000;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-    font-size: 0.95rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #333;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  font-size: 0.95rem;
 }
 
 .toast-show {
-    opacity: 1;
-    visibility: visible;
+  opacity: 1;
+  visibility: visible;
 }
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 400;
-    font-size: 0.875rem;
-    text-size-adjust: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 0.875rem;
+  text-size-adjust: 100%;
 }
 
 /* Responsive base font size */
 @media (max-width: 576px) {
-    html {
-        font-size: 14px;
-    }
+  html {
+    font-size: 14px;
+  }
 }
 
 @media (min-width: 577px) and (max-width: 768px) {
-    html {
-        font-size: 15px;
-    }
+  html {
+    font-size: 15px;
+  }
 }
 
 @media (min-width: 769px) {
-    html {
-        font-size: 16px;
-    }
+  html {
+    font-size: 16px;
+  }
 }
 
 html, body {
-    text-rendering: geometricPrecision;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-text-size-adjust: 100%;
-    -ms-text-size-adjust: 100%;
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
 }
 
 
 .container {
-    padding: clamp(10px, 3vw, 30px);
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
+  padding: clamp(10px, 3vw, 30px);
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .bg-container {
-    min-height: 100vh;
-    background-image: url("../img/halaman_utama_1.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+  min-height: 100vh;
+  background-image: url("../img/halaman_utama_1.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 .card {
-    background-color: rgba(255, 255, 255, 0.8);
-    border-radius: 8px;
-    overflow: hidden;
-    width: 100%;
-    transition: transform 0.3s;
-    border: none;
-    margin-bottom: clamp(10px, 2vw, 20px);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
+  overflow: hidden;
+  width: 100%;
+  transition: transform 0.3s;
+  border: none;
+  margin-bottom: clamp(10px, 2vw, 20px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 @media (max-width: 576px) {
-    .card {
-        max-width: 100%;
-        margin-left: auto;
-        margin-right: auto;
-    }
+  .card {
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 @media (min-width: 577px) and (max-width: 768px) {
-    .card {
-        max-width: 90%;
-        margin-left: auto;
-        margin-right: auto;
-    }
+  .card {
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 .card .card-img-top {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 16/11;
-    object-fit: cover;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16/11;
+  object-fit: cover;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 @media (max-width: 576px) {
-    .card .card-img-top {
-        aspect-ratio: 4/3; /* Slightly taller images on mobile */
-    }
+  .card .card-img-top {
+    aspect-ratio: 4/3; /* Slightly taller images on mobile */
+  }
 }
 
 .card .card-body {
-    padding: clamp(10px, 3vw, 20px);
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 60px;
+  padding: clamp(10px, 3vw, 20px);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60px;
 }
 
 /* Specific styling for card-body in game.html */
 #cardGameImage .card-body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 @media (max-width: 576px) {
-    .card .card-body {
-        min-height: 50px;
-    }
+  .card .card-body {
+    min-height: 50px;
+  }
 }
 
 .text {
-    margin-bottom: clamp(20px, 4vw, 40px);
-    width: 100%;
+  margin-bottom: clamp(20px, 4vw, 40px);
+  width: 100%;
 }
 
 .text h1 {
-    text-align: center;
-    font-size: clamp(1.5rem, 5vw, 2.5rem);
-    font-weight: 700;
-    color: #fff;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    padding: 0 10px;
+  text-align: center;
+  font-size: clamp(1.5rem, 5vw, 2.5rem);
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  padding: 0 10px;
 }
 
 @media (max-width: 576px) {
-    .text {
-        margin-bottom: 15px;
-    }
+  .text {
+    margin-bottom: 15px;
+  }
 
-    .text h1 {
-        font-size: 1.5rem;
-    }
+  .text h1 {
+    font-size: 1.5rem;
+  }
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .btn {
-    font-size: clamp(0.8rem, 2vw, 1rem);
-    padding: clamp(6px, 1.5vw, 10px) clamp(12px, 3vw, 20px);
-    background: #ff9800;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    width: fit-content;
-    display: inline-block;
+  font-size: clamp(0.8rem, 2vw, 1rem);
+  padding: clamp(6px, 1.5vw, 10px) clamp(12px, 3vw, 20px);
+  background: #ff9800;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  width: fit-content;
+  display: inline-block;
 }
 
 .btn:hover {
-    background: #e68900;
-    transform: scale(1.05);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background: #e68900;
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 @media (max-width: 576px) {
-    .btn {
-        font-size: 0.85rem;
-        padding: 6px 12px;
-        letter-spacing: 0.3px;
-    }
+  .btn {
+    font-size: 0.85rem;
+    padding: 6px 12px;
+    letter-spacing: 0.3px;
+  }
 }
 
 /* === PUZZLE === */
 #puzzle-board {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-    width: 100%;
-    aspect-ratio: 16/11;
-    gap: 2px;
-    margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  width: 100%;
+  aspect-ratio: 16/11;
+  gap: 2px;
+  margin: 0 auto;
 }
+
 .puzzle-piece {
-    width: 100%;
-    height: 100%;
-    cursor: grab;
-    background-repeat: no-repeat;
-    background-size: 300% 300%;
-    transition: all 0.2s;
-    background-size: 300% 300%; /* Triple the size to cover all 9 pieces */
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+  background-repeat: no-repeat;
+  background-size: 300% 300%;
+  transition: all 0.2s;
+  background-size: 300% 300%; /* Triple the size to cover all 9 pieces */
 }
-.puzzle-piece[data-index="0"] { background-position: 0% 0%; }
-.puzzle-piece[data-index="1"] { background-position: 50% 0%; }
-.puzzle-piece[data-index="2"] { background-position: 100% 0%; }
-.puzzle-piece[data-index="3"] { background-position: 0% 50%; }
-.puzzle-piece[data-index="4"] { background-position: 50% 50%; }
-.puzzle-piece[data-index="5"] { background-position: 100% 50%; }
-.puzzle-piece[data-index="6"] { background-position: 0% 100%; }
-.puzzle-piece[data-index="7"] { background-position: 50% 100%; }
-.puzzle-piece[data-index="8"] { background-position: 100% 100%; }
+
+.puzzle-piece[data-index="0"] {
+  background-position: 0% 0%;
+}
+
+.puzzle-piece[data-index="1"] {
+  background-position: 50% 0%;
+}
+
+.puzzle-piece[data-index="2"] {
+  background-position: 100% 0%;
+}
+
+.puzzle-piece[data-index="3"] {
+  background-position: 0% 50%;
+}
+
+.puzzle-piece[data-index="4"] {
+  background-position: 50% 50%;
+}
+
+.puzzle-piece[data-index="5"] {
+  background-position: 100% 50%;
+}
+
+.puzzle-piece[data-index="6"] {
+  background-position: 0% 100%;
+}
+
+.puzzle-piece[data-index="7"] {
+  background-position: 50% 100%;
+}
+
+.puzzle-piece[data-index="8"] {
+  background-position: 100% 100%;
+}
