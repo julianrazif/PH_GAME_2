@@ -38,15 +38,12 @@
     }
 
     .puzzle-piece {
-  position: absolute;
-  width: 100px;
-  height: 100px;
-  background-image: url("img/hewan/singa/singa.jpg"); /* Gambar utuh */
-  background-position: -100px -100px; /* Atur potongan ke posisi tertentu */
-  -webkit-mask-image: url("../img/hewan/singa/piece_0_0.png"); /* bentuk puzzle */
-  mask-image: url("../PH_GAME_2/assets/img/hewan/singa/piece_0_0.png");
-  mask-size: cover;
-}
+      width: 128px;
+      height: 128px;
+      cursor: grab;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
 
     .controls {
       display: flex;
@@ -83,15 +80,7 @@
 </head>
 <body>
 <div class="game-container">
-  <div class="puzzle-container" id="puzzle" style="top: 0; left: 0;">
-    <div class="puzzle-container">
-      <div class="puzzle-piece" data-row="0" data-col="0"></div>
-      <div class="puzzle-piece" data-row="0" data-col="1"></div>
-      <div class="puzzle-piece" data-row="0" data-col="2"></div>
-      <div class="puzzle-piece" data-row="1" data-col="0"></div>
-      <div class="puzzle-piece" data-row="1" data-col="1"></div>
-      <div class="puzzle-piece" data-row="1" data-col="2"></div>
-    </div>
+  <div class="puzzle-container" id="puzzle">
     <!-- Potongan gambar akan dimuat lewat JS -->
   </div>
   <div class="puzzle-piece" draggable="true"></div>
@@ -139,19 +128,6 @@
       });
     }
   }
-
-  const pieces = document.querySelectorAll('.puzzle-piece');
-
-pieces.forEach(piece => {
-  const row = piece.dataset.row;
-  const col = piece.dataset.col;
-
-  // Mask dan background berdasarkan posisi
-  piece.style.maskImage = `url("img/hewan/singa/piece_${row}_${col}.png")`;
-  piece.style.webkitMaskImage = `url("img/hewan/singa/piece_${row}_${col}.png")`;
-  piece.style.backgroundImage = 'url("img/hewan/singa/singa.jpg")';
-  piece.style.backgroundPosition = `-${col * 100}px -${row * 100}px`;
-});
 
   // Initialize the game
   function initGame() {
@@ -228,37 +204,54 @@ pieces.forEach(piece => {
     });
   }
 
-  // Timer
+  // Start the timer
   function startTimer() {
     startTime = new Date();
-    timerInterval = setInterval(() => {
-      const elapsed = Math.floor((new Date() - startTime) / 1000);
-      const minutes = String(Math.floor(elapsed / 60)).padStart(2, '0');
-      const seconds = String(elapsed % 60).padStart(2, '0');
-      timerElement.textContent = `${minutes}:${seconds}`;
-    }, 1000);
+    timerInterval = setInterval(updateTimer, 1000);
   }
 
-  // Check if puzzle is solved
+  // Update the timer display
+  function updateTimer() {
+    const currentTime = new Date();
+    const elapsedTime = Math.floor((currentTime - startTime) / 1000);
+    const minutes = Math.floor(elapsedTime / 60).toString().padStart(2, '0');
+    const seconds = (elapsedTime % 60).toString().padStart(2, '0');
+    timerElement.textContent = `${minutes}:${seconds}`;
+  }
+
+  // Check if the puzzle is solved
   function checkSolution() {
-    const currentPieces = document.querySelectorAll(".puzzle-piece");
-    const isCorrect = Array.from(currentPieces).every((piece, index) => {
-      return parseInt(piece.dataset.correctIndex) === index;
+    let isSolved = true;
+    const pieces = document.querySelectorAll(".puzzle-piece");
+
+    pieces.forEach((piece, currentIndex) => {
+      if (parseInt(piece.dataset.correctIndex) !== currentIndex) {
+        isSolved = false;
+      }
     });
 
-    if (isCorrect) {
-      messageElement.textContent = "Selamat! Puzzle berhasil diselesaikan 🎉";
+    if (isSolved) {
       clearInterval(timerInterval);
+      messageElement.textContent = "Congratulations! Puzzle solved!";
+      messageElement.style.color = "green";
     } else {
-      messageElement.textContent = "Belum benar, coba lagi!";
+      messageElement.textContent = "Not quite right. Keep trying!";
+      messageElement.style.color = "red";
+
+      // Clear message after 3 seconds
+      setTimeout(() => {
+        messageElement.textContent = "";
+      }, 3000);
     }
+
+    return isSolved;
   }
 
-  // Event listeners
+  // Event listeners for buttons
   resetBtn.addEventListener("click", initGame);
   checkBtn.addEventListener("click", checkSolution);
 
-  // Mulai permainan
+  // Initialize the game on load
   initGame();
 </script>
 </body>
